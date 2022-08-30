@@ -12,7 +12,12 @@ class PerguntaApp extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Perguntas'),
         ),
-        body: const Text('Olar flutter'),
+        //o body é um widget que suporta apenas 1 widget, para resolver este problema, vamos passar um widget que suporta uma lista de widget
+        body: Column(
+          children: const <Widget>[
+            Text('Olar flutter'),
+          ],
+        ),
       ),
     );
   }
