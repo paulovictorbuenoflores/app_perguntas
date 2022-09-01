@@ -11,10 +11,10 @@ void main(List<String> args) => runApp(PerguntaApp());
  4-criar um metodo:  PerguntaAppState createState() {} na classe stateful
  5-criar outro metodo setState() e passar aquilo que esta sendo modificado, no caso é o contador perguntaselecionada++;
  */
-class PerguntaAppState extends State<PerguntaApp> {
+class _PerguntaAppState extends State<PerguntaApp> {
   var perguntaSelecionada = 0;
 
-  void responder() {
+  void _responder() {
     setState(() {
       perguntaSelecionada++;
     });
@@ -40,15 +40,15 @@ class PerguntaAppState extends State<PerguntaApp> {
             RaisedButton(
               child: const Text('Resposta 1'),
               onPressed:
-                  responder, //passando uma funcao para outra classe, isso é diferente de chamar a funcao responder()
+                  _responder, //passando uma funcao para outra classe, isso é diferente de chamar a funcao responder()
             ),
             RaisedButton(
               child: const Text('Resposta 2'),
-              onPressed: responder,
+              onPressed: _responder,
             ),
             RaisedButton(
               child: const Text('Resposta 3'),
-              onPressed: responder,
+              onPressed: _responder,
             ),
           ],
         ),
@@ -59,7 +59,7 @@ class PerguntaAppState extends State<PerguntaApp> {
 
 class PerguntaApp extends StatefulWidget {
   @override
-  PerguntaAppState createState() {
-    return PerguntaAppState();
+  _PerguntaAppState createState() {
+    return _PerguntaAppState();
   }
 }
