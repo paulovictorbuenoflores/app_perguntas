@@ -3,19 +3,40 @@ import 'package:flutter/material.dart';
 void main(List<String> args) => runApp(PerguntaApp());
 
 class PerguntaApp extends StatelessWidget {
+  var perguntaSelecionada = 0;
+  void responder() {
+    perguntaSelecionada++;
+    print(perguntaSelecionada);
+  }
+
+  final List<String> perguntas = [
+    'Qual é sua cor favorita ?',
+    'Qual é seu animal favorita?'
+  ];
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      //scanffold é a estrutura da aplicacao
       home: Scaffold(
-        //vou comecando a criar minha arvore de componente baseada em composicao
         appBar: AppBar(
-          title: const Text('Perguntas'),
+          title: Text('Pergunta'),
         ),
-        //o body é um widget que suporta apenas 1 widget, para resolver este problema, vamos passar um widget que suporta uma lista de widget
         body: Column(
-          children: const <Widget>[
-            Text('Olar flutter'),
+          children: <Widget>[
+            Text(perguntas[perguntaSelecionada]),
+            RaisedButton(
+              child: const Text('Resposta 1'),
+              onPressed:
+                  responder, //passando uma funcao para outra classe, isso é diferente de chamar a funcao responder()
+            ),
+            RaisedButton(
+              child: const Text('Resposta 2'),
+              onPressed: responder,
+            ),
+            RaisedButton(
+              child: const Text('Resposta 3'),
+              onPressed: responder,
+            ),
           ],
         ),
       ),
