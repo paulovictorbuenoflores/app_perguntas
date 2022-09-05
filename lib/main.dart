@@ -38,18 +38,27 @@ class _PerguntaAppState extends State<PerguntaApp> {
         body: Column(
           children: <Widget>[
             Questao(perguntas[_perguntaSelecionada]),
-            RaisedButton(
-              child: const Text('Resposta 1'),
-              onPressed:
-                  _responder, //passando uma funcao para outra classe, isso é diferente de chamar a funcao responder()
+            Container(
+              margin: const EdgeInsets.only(top: 16),
+              child: RaisedButton(
+                child: const Text('Resposta 1'),
+                onPressed:
+                    _responder, //passando uma funcao para outra classe, isso é diferente de chamar a funcao responder()
+              ),
             ),
-            RaisedButton(
-              child: const Text('Resposta 2'),
-              onPressed: _responder,
+            Container(
+              margin: const EdgeInsets.only(top: 16),
+              child: RaisedButton(
+                child: const Text('Resposta 2'),
+                onPressed: _responder,
+              ),
             ),
-            RaisedButton(
-              child: const Text('Resposta 3'),
-              onPressed: _responder,
+            Container(
+              margin: const EdgeInsets.only(top: 16),
+              child: RaisedButton(
+                child: const Text('Resposta 3'),
+                onPressed: _responder,
+              ),
             ),
           ],
         ),
