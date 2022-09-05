@@ -2,7 +2,7 @@
 
 A new Flutter project.
 A cara da aplicação
-<img src="cara.jpeg" width="869" height="869" />
+<img src="cara.png" width="869" height="869" />
 
 
 ## Getting Started
