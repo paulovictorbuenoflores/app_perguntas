@@ -6,7 +6,7 @@ A cara da aplicação
 
 Como era nossa arvore de componente.
 <img src="arvoreComponente.png" width="869" height="869" />
-Como é ficou nossa arvore de componente
+Como ficou nossa arvore de componente
 <img src="arvoreComponenteNova.png" width="869" height="869" />
 
 ## Getting Started
