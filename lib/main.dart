@@ -71,7 +71,9 @@ class _PerguntaAppState extends State<PerguntaApp> {
                   ...respostas.map((t) => Resposta(t, _responder)).toList(),
                 ],
               )
-            : Text("Parabéns"),
+            : Center(
+                child: Text('Parabéns'),
+              ),
       ),
     );
   }
