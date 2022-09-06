@@ -26,23 +26,41 @@ class _PerguntaAppState extends State<PerguntaApp> {
 
   @override
   Widget build(BuildContext context) {
-    final List<String> perguntas = [
-      'Qual é sua cor favorita ?',
-      'Qual é seu animal favorita?'
+    //como estou trabalhando com inferencia, não precisa referenciar, pode ser só: final perguntas =[{}];
+    final List<Map<String, Object>> perguntas = [
+      {
+        'texto': 'Qual é a sua cor favorita?',
+        'resposta': ['Red', 'Blue', 'Green', 'yelow'],
+      },
+      {
+        'texto': 'Qual é o seu animal favorito?',
+        'resposta': ['Gato', 'Cachorro', 'outro'],
+      },
+      {
+        'texto': 'Qual é o seu esporte favorito?',
+        'resposta': [
+          'BMX',
+          'Downhill',
+          'FreeRide',
+          'Enduro',
+          'MotoCross',
+          'Esporte Não radical'
+        ],
+      },
     ];
+
+    List<String> respostas = perguntas[_perguntaSelecionada].cast()['resposta'];
 
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Pergunta'),
+          title: const Text('Pergunta'),
         ),
         body: Column(
           children: <Widget>[
-            if (_perguntaSelecionada < perguntas.length)
-              Questao(perguntas[_perguntaSelecionada]),
-            Resposta('Resposta 1', _responder),
-            Resposta('Resposta 2', _responder),
-            Resposta('Resposta 3', _responder),
+            // Questao((perguntas[_perguntaSelecionada]['texto']) as String),
+            Questao(perguntas[_perguntaSelecionada]['texto'].toString()),
+            ...respostas.map((t) => Resposta(t, _responder)).toList(),
           ],
         ),
       ),
