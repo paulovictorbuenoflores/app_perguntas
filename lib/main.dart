@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import './questao.dart';
+import './resposta.dart';
 
 void main(List<String> args) => runApp(PerguntaApp());
 
 /**
  * 
- *Como passa de stateles para stateful?
+ *           Como passa de stateles para stateful?
  1-criar uma classe state para gerenciar a classe statefull. PerguntaAppState
  2-extender o State e passar como generic a classe Statefullwidget que desejo gerenciar com meu State;
  3-passo o estado da aplicacao que vai ser gerenciado para a classe PerguntaAppState, no caso é tudo, vai ficar so a classe statefull
@@ -38,28 +39,9 @@ class _PerguntaAppState extends State<PerguntaApp> {
         body: Column(
           children: <Widget>[
             Questao(perguntas[_perguntaSelecionada]),
-            Container(
-              margin: const EdgeInsets.only(top: 16),
-              child: RaisedButton(
-                child: const Text('Resposta 1'),
-                onPressed:
-                    _responder, //passando uma funcao para outra classe, isso é diferente de chamar a funcao responder()
-              ),
-            ),
-            Container(
-              margin: const EdgeInsets.only(top: 16),
-              child: RaisedButton(
-                child: const Text('Resposta 2'),
-                onPressed: _responder,
-              ),
-            ),
-            Container(
-              margin: const EdgeInsets.only(top: 16),
-              child: RaisedButton(
-                child: const Text('Resposta 3'),
-                onPressed: _responder,
-              ),
-            ),
+            Resposta('Resposta 1'),
+            Resposta('Resposta 2'),
+            Resposta('Resposta 3'),
           ],
         ),
       ),
