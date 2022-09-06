@@ -16,6 +16,28 @@ void main(List<String> args) => runApp(PerguntaApp());
 class _PerguntaAppState extends State<PerguntaApp> {
   var _perguntaSelecionada = 0;
 
+  final List<Map<String, Object>> _perguntas = const [
+    {
+      'texto': 'Qual é a sua cor favorita?',
+      'resposta': ['Red', 'Blue', 'Green', 'yelow'],
+    },
+    {
+      'texto': 'Qual é o seu animal favorito?',
+      'resposta': ['Gato', 'Cachorro', 'outro'],
+    },
+    {
+      'texto': 'Qual é o seu esporte favorito?',
+      'resposta': [
+        'BMX',
+        'Downhill',
+        'FreeRide',
+        'Enduro',
+        'MotoCross',
+        'Esporte Não radical'
+      ],
+    },
+  ];
+
   void _responder() {
     setState(() {
       _perguntaSelecionada++;
@@ -24,45 +46,32 @@ class _PerguntaAppState extends State<PerguntaApp> {
     // print(_perguntaSelecionada);
   }
 
+  bool get temPerguntaSelecionada {
+    return _perguntaSelecionada < _perguntas.length;
+  }
+
   @override
   Widget build(BuildContext context) {
     //como estou trabalhando com inferencia, não precisa referenciar, pode ser só: final perguntas =[{}];
-    final List<Map<String, Object>> perguntas = [
-      {
-        'texto': 'Qual é a sua cor favorita?',
-        'resposta': ['Red', 'Blue', 'Green', 'yelow'],
-      },
-      {
-        'texto': 'Qual é o seu animal favorito?',
-        'resposta': ['Gato', 'Cachorro', 'outro'],
-      },
-      {
-        'texto': 'Qual é o seu esporte favorito?',
-        'resposta': [
-          'BMX',
-          'Downhill',
-          'FreeRide',
-          'Enduro',
-          'MotoCross',
-          'Esporte Não radical'
-        ],
-      },
-    ];
 
-    List<String> respostas = perguntas[_perguntaSelecionada].cast()['resposta'];
+    List<String> respostas = temPerguntaSelecionada
+        ? _perguntas[_perguntaSelecionada].cast()['resposta']
+        : [];
 
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
           title: const Text('Pergunta'),
         ),
-        body: Column(
-          children: <Widget>[
-            // Questao((perguntas[_perguntaSelecionada]['texto']) as String),
-            Questao(perguntas[_perguntaSelecionada]['texto'].toString()),
-            ...respostas.map((t) => Resposta(t, _responder)).toList(),
-          ],
-        ),
+        body: temPerguntaSelecionada
+            ? Column(
+                children: <Widget>[
+                  // Questao((perguntas[_perguntaSelecionada]['texto']) as String),
+                  Questao(_perguntas[_perguntaSelecionada]['texto'].toString()),
+                  ...respostas.map((t) => Resposta(t, _responder)).toList(),
+                ],
+              )
+            : Text("Parabéns"),
       ),
     );
   }
