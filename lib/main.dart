@@ -15,35 +15,54 @@ void main(List<String> args) => runApp(PerguntaApp());
  */
 class _PerguntaAppState extends State<PerguntaApp> {
   var _perguntaSelecionada = 0;
-
+  int _notaTotal = 0;
   final List<Map<String, Object>> _perguntas = const [
     {
       'texto': 'Qual é a sua cor favorita?',
-      'resposta': ['Red', 'Blue', 'Green', 'yelow'],
+      'resposta': [
+        {'texto': 'Red', 'nota': 10},
+        {'texto': 'Blue', 'nota': 7},
+        {'texto': 'Green', 'nota': 5},
+        {'texto': 'yelow', 'nota': -6},
+      ],
     },
     {
       'texto': 'Qual é o seu animal favorito?',
-      'resposta': ['Gato', 'Cachorro', 'outro'],
+      'resposta': [
+        {'texto': 'Gato', 'nota': -10},
+        {'texto': 'Cachorro', 'nota': 10},
+        {'texto': 'outro', 'nota': -10},
+      ],
     },
     {
       'texto': 'Qual é o seu esporte favorito?',
       'resposta': [
-        'BMX',
-        'Downhill',
-        'FreeRide',
-        'Enduro',
-        'MotoCross',
-        'Esporte Não radical'
+        {'texto': 'BMX', 'nota': 10},
+        {'texto': 'Downhill', 'nota': 10},
+        {'texto': 'FreeRide', 'nota': 10},
+        {'texto': 'Enduro', 'nota': 10},
+        {'texto': 'MotoCross', 'nota': 10},
+        {'texto': 'Esporte Não radical', 'nota': -10},
       ],
     },
   ];
 
-  void _responder() {
-    setState(() {
-      _perguntaSelecionada++;
-    });
-
+  void _responder(int nota) {
+    if (temPerguntaSelecionada) {
+      setState(() {
+        _perguntaSelecionada++;
+        _notaTotal += nota;
+      });
+    }
+    print(_notaTotal);
     // print(_perguntaSelecionada);
+  }
+
+  void _reiniciarQuestionario() {
+    setState(() {
+      _perguntaSelecionada = 0;
+      _notaTotal = 0;
+    });
   }
 
   bool get temPerguntaSelecionada {
@@ -54,10 +73,6 @@ class _PerguntaAppState extends State<PerguntaApp> {
   Widget build(BuildContext context) {
     //como estou trabalhando com inferencia, não precisa referenciar, pode ser só: final perguntas =[{}];
 
-    List<String> respostas = temPerguntaSelecionada
-        ? _perguntas[_perguntaSelecionada].cast()['resposta']
-        : [];
-
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -67,9 +82,9 @@ class _PerguntaAppState extends State<PerguntaApp> {
             ? Questionario(
                 perguntas: _perguntas,
                 perguntaSelecionada: _perguntaSelecionada,
-                responder: _responder,
+                quandoResponder: _responder,
               )
-            : const Resultado(),
+            : Resultado(_notaTotal, _reiniciarQuestionario),
       ),
     );
   }
